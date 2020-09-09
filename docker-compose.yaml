@@ -1,0 +1,40 @@
+version: "3.7"
+services:
+  db:
+    image: mysql:8
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: goevent
+      MYSQL_PASSWORD: goevent
+      MYSQL_DATABASE: image_goevent
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      DB_HOST: tcp(db:3306)
+    volumes:
+      - ./docker/data:/docker-entrypoint-initdb.d
+    networks:
+      - backend
+
+  # Api Service
+  api:
+    build:
+      context: ./
+      dockerfile: ./docker/build/golang/Dockerfile
+    environment:
+      CORS_ALLOWED_ORIGINS: "http://localhost:8000"
+      API_PORT: "8080"
+      MYSQL_USER: goevent
+      MYSQL_PASSWORD: goevent
+      MYSQL_DATABASE: image_goevent
+      DB_HOST: tcp(db:3306)
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/go:rw
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: "bridge"
