@@ -13,21 +13,21 @@ RUN apk update && apk upgrade && \
 # Add Maintainer Info
 LABEL maintainer="Thomas Raineau - Hetic"
 
-WORKDIR /go/src/goevent
-COPY go.sum go.mod /go/src/goevent/
+WORKDIR /go/src/goproject
+COPY go.sum go.mod /go/src/goproject/
 
 # Download all dependancies. Dependencies will be cached if the go.mod and go.sum files are not changed
 RUN go mod download
 
-COPY . /go/src/goevent/
+COPY . /go/src/goproject/
 
 # Build the Go app
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/goevent .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/goproject .
 
 FROM alpine
 
-COPY --from=builder /go/src/goevent/bin/goevent /
+COPY --from=builder /go/src/goproject/bin/goproject /
 
 EXPOSE 8080
 
-ENTRYPOINT ["/goevent"]
+ENTRYPOINT ["/goproject"]

@@ -6,9 +6,9 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_USER: goevent
-      MYSQL_PASSWORD: goevent
-      MYSQL_DATABASE: image_goevent
+      MYSQL_USER: goproject
+      MYSQL_PASSWORD: goproject
+      MYSQL_DATABASE: image_goproject
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       DB_HOST: tcp(db:3306)
     volumes:
@@ -22,7 +22,6 @@ services:
       context: ./
       dockerfile: ./docker/build/golang/Dockerfile
     environment:
-      CORS_ALLOWED_ORIGINS: "http://localhost:8000"
       API_PORT: "8080"
       MYSQL_USER: goevent
       MYSQL_PASSWORD: goevent
