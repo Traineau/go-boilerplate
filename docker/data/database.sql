@@ -1,6 +1,0 @@
-CREATE TABLE command (
-    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    client TEXT NOT NULL,
-    date DATETIME,
-    PRIMARY KEY(id)
-)
