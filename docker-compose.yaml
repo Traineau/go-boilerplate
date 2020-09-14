@@ -23,9 +23,9 @@ services:
       dockerfile: ./docker/build/golang/Dockerfile
     environment:
       API_PORT: "8080"
-      MYSQL_USER: goevent
-      MYSQL_PASSWORD: goevent
-      MYSQL_DATABASE: image_goevent
+      MYSQL_USER: goproject
+      MYSQL_PASSWORD: goproject
+      MYSQL_DATABASE: image_goproject
       DB_HOST: tcp(db:3306)
     ports:
       - "8080:8080"
